@@ -23,6 +23,7 @@ MANIFEST
 
 # Virtual environments
 venv/
+polaris_installer/dist/
 ENV/
 env/
 env.bak/

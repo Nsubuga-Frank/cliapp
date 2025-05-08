@@ -2,6 +2,9 @@
 import os
 import sys
 
+# Force Qt to use X11 backend instead of Wayland
+os.environ["QT_QPA_PLATFORM"] = "xcb"
+
 from src.installer import PolarisInstaller
 
 

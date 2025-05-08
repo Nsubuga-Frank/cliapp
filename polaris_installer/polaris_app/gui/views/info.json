@@ -1,0 +1,40 @@
+[
+    {
+      "hostname": "user-machine",
+      "operating_system": "Linux/Windows/MacOS",
+      "ip_address": "192.168.1.100",
+      "compute_resources": [
+        {
+          "id": "resource1", 
+          "resource_type": "CPU",
+          "location": "Unknown",
+          "hourly_price": 1.0,
+          "ram": "16GB",
+          "storage": {
+            "type": "SSD",
+            "capacity": "500GB"
+          },
+          "network": {
+            "internal_ip": "192.168.1.100",
+            "ssh": "ssh://username@hostname:22",
+            "open_ports": ["22", "8080"],
+            "username": "username",
+            "auth_type": "public_key"
+          },
+          "cpu_specs": {
+            "model": "Intel/AMD...",
+            "cores": 8,
+            "threads": 16,
+            "frequency": "3.6GHz"
+          },
+          "gpu_specs": [
+            {
+              "model": "NVIDIA RTX 3080",
+              "vram": "10GB",
+              "cuda_cores": 8704
+            }
+          ]
+        }
+      ]
+    }
+  ]

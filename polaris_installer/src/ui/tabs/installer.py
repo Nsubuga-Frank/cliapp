@@ -230,9 +230,9 @@ class InstallerTab(QWidget):
             
             # Determine the launcher path based on platform
             if os.name == "nt":  # Windows
-                launcher_path = os.path.join(install_dir, "polaris_gui", "launch.bat")
+                launcher_path = os.path.join(install_dir, "scripts", "launch.bat")
             else:  # Linux/macOS/WSL
-                launcher_path = os.path.join(install_dir, "polaris_gui", "launch.sh")
+                launcher_path = os.path.join(install_dir, "scripts", "launch.sh")
             
             # Make sure the launcher exists
             if os.path.exists(launcher_path):
@@ -278,11 +278,11 @@ class InstallerTab(QWidget):
                 self.add_log_message(f"[INFO] Looking for alternate launcher script...")
                 
                 # Try to find any launcher script in the directory
-                gui_dir = os.path.join(install_dir, "polaris_gui")
-                if os.path.exists(gui_dir):
-                    for file in os.listdir(gui_dir):
+                scripts_dir_alt = os.path.join(install_dir, "scripts")
+                if os.path.exists(scripts_dir_alt):
+                    for file in os.listdir(scripts_dir_alt):
                         if file.startswith("launch"):
-                            alt_launcher = os.path.join(gui_dir, file)
+                            alt_launcher = os.path.join(scripts_dir_alt, file)
                             self.add_log_message(f"[INFO] Found alternate launcher: {alt_launcher}")
                             
                             # Try to run the alternate launcher
@@ -292,18 +292,18 @@ class InstallerTab(QWidget):
                             if file.endswith(".bat"):
                                 subprocess.Popen(f'start cmd /c "{alt_launcher}"', 
                                                shell=True, 
-                                               cwd=gui_dir)
+                                               cwd=scripts_dir_alt)
                             else:
                                 proc = subprocess.Popen(["bash", alt_launcher], 
                                                shell=False,
-                                               cwd=gui_dir,
+                                               cwd=scripts_dir_alt,
                                                start_new_session=True)
                             
                             self.add_log_message("[INFO] Attempted to launch using alternate script")
                             return
                 
                 self.add_log_message("[ERROR] No launcher scripts found. Manual launch required.")
-                self.add_log_message(f"[INFO] Try running: cd {os.path.join(install_dir, 'polaris_gui')} && python main.py")
+                self.add_log_message(f"[INFO] Try running: cd {os.path.join(install_dir, 'polaris_app')} && python main.py")
         except Exception as e:
             self.add_log_message(f"[ERROR] Failed to launch application: {str(e)}")
             # Show traceback for debugging
